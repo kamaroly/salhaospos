@@ -30,7 +30,7 @@ class Item extends CI_Model
 		$this->db->offset($offset);
 		return $this->db->get();
 	}
-	
+
 	function count_all()
 	{
 		$this->db->from('items');
@@ -51,8 +51,6 @@ class Item extends CI_Model
 		{
 			$this->db->where('description','');
 		}        
-        
-        
 /**GARRISON SECTION ADDED 4/21/2013**/
 /**
 		if ($search_custom!=0 )

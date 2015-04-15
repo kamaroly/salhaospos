@@ -947,15 +947,43 @@ class Reports extends Secure_area
     
 	function excel_export()
 	{
-		$this->load->view("reports/excel_export",array());		
+
+		$data = array();
+		if(uri_string() =='reports/inventory_summary' || uri_string() =='reports/inventory_low')
+		{
+			////////////////////////////////////////////////////////////////////////////////
+			// we are looking for inventory let's add some fields as per Salha request //
+			////////////////////////////////////////////////////////////////////////////////
+			$suppliers = array(0 => $this->lang->line('items_none'));
+
+			foreach($this->Supplier->get_all()->result_array() as $row)
+			{
+				$suppliers[$row['person_id']] = $row['company_name'] .' ('.$row['first_name'] .' '. $row['last_name'].')';
+			}
+
+			$data['suppliers']=$suppliers;
+		   
+			$categories = array('' => 'Select Category');
+			
+			foreach($this->Item->get_categories()->result() as $row)
+			{
+				$categories[trim($row->category)] = trim($row->category);
+			}
+
+			$data['categories']=$categories;
+		    
+		}
+		$this->load->view("reports/excel_export",$data);		
 	}
 	
-	function inventory_low($export_excel=0)
+	function inventory_low($export_excel=0,$supplier=0,$category=null)
 	{
 		$this->load->model('reports/Inventory_low');
 		$model = $this->Inventory_low;
 		$tabular_data = array();
-		$report_data = $model->getData(array());
+		
+		$report_data = $model->getData(array(),$supplier,$category);
+
 		foreach($report_data as $row)
 		{
 			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['cost_price'], $row['unit_price'], $row['whole_price'], $row['reorder_level'], $row['location_name']);
@@ -966,7 +994,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array()),
+			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
 			"export_excel" => $export_excel
 		);
 
@@ -978,7 +1006,7 @@ class Reports extends Secure_area
 		$this->load->model('reports/Inventory_summary');
 		$model = $this->Inventory_summary;
 		$tabular_data = array();
-		$report_data = $model->getData(array());
+		$report_data = $model->getData(array(),$supplier,$category);
 		foreach($report_data as $row)
 		{
 			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['cost_price'], $row['unit_price'], $row['whole_price'], $row['reorder_level'],$row['location_name']);
@@ -989,7 +1017,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array()),
+			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
 			"export_excel" => $export_excel
 		);
 
