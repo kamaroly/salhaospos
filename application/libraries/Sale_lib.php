@@ -181,6 +181,27 @@ class Sale_lib
 		$this->CI->session->set_userdata('customer',$customer_id);
 	}
 
+	/**
+	 * @author Kamaro Lambert
+	 * Set the price category in the cart
+	 */
+	function set_price_category($price_category)
+	{
+		$this->CI->session->set_userdata('price_category',$price_category);
+	}
+
+	/**
+	 * @author Kamaro Lambert
+	 * Set the price category in the cart
+	 */
+	function get_price_category()
+	{
+		if(!$this->CI->session->userdata('price_category'))
+			$this->set_mode('retail');
+
+		return $this->CI->session->userdata('price_category');
+	}
+
 	function get_mode()
 	{
 		if(!$this->CI->session->userdata('sale_mode'))
@@ -256,6 +277,10 @@ class Sale_lib
 
 		$insertkey=$maxkey+1;
 		$item_info=$this->CI->Item->get_info($item_id,$item_location);
+
+		// Added by Kamaro Lambert
+		// First determine which price are using 
+		$selling_price =  ($this->get_price_category() =='retail') ?$item_info->unit_price:$item_info->whole_price; 
 		//array/cart records are identified by $insertkey and item_id is just another field.
 		$item = array(($insertkey)=>
 		array(
@@ -272,7 +297,7 @@ class Sale_lib
 			'quantity'=>$quantity,
             'discount'=>$discount,
 			'in_stock'=>$this->CI->Item_quantities->get_item_quantity($item_id, $item_location)->quantity,
-			'price'=>$price!=null ? $price: $item_info->unit_price
+			'price'=>$price!=null ? $price: $selling_price
 			)
 		);
 

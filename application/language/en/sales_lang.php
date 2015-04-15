@@ -3,6 +3,7 @@ $lang['sales_giftcard_number']='Gift Card Number';
 $lang['sales_giftcard']='Gift Card';
 $lang['sales_register']='Sales Register';
 $lang['sales_mode']='Register Mode';
+$lang['sales_price_category']='Price Category';
 $lang['sales_new_item'] = 'New Item';
 $lang['sales_item_name'] = 'Item Name';
 $lang['sales_item_number'] = 'Item #';
@@ -93,4 +94,8 @@ $lang['sales_date_type']='Date field is required';
 $lang['sales_invoice_number_duplicate'] = 'Please enter an unique invoice number';
 $lang['sales_one_or_multiple']='sale(s)';
 $lang['sales_invoice_enable']='Create Invoice';
+
+// PRICE CATEGORIES
+$lang['sales_retail_price']='Retail price';
+$lang['sales_whole_price']='Whole price';
 ?>

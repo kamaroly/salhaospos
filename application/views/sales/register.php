@@ -20,6 +20,13 @@ if (isset($success))
 <?php echo form_open("sales/change_mode",array('id'=>'mode_form')); ?>
 	<span><?php echo $this->lang->line('sales_mode') ?></span>
 <?php echo form_dropdown('mode',$modes,$mode,'onchange="$(\'#mode_form\').submit();"'); ?>
+
+<!-- Added price categories -->
+<span><?php echo $this->lang->line('sales_price_category') ?></span>
+<?php echo form_dropdown('price_category',$price_categories,$price_category,'onchange="$(\'#mode_form\').submit();"'); ?>
+
+<!-- Price categories -->
+
 <?php if (count($stock_locations) > 1): ?>
 <span><?php echo $this->lang->line('sales_stock_location') ?></span>
 <?php echo form_dropdown('stock_location',$stock_locations,$stock_location,'onchange="$(\'#mode_form\').submit();"'); ?>

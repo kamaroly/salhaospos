@@ -35,12 +35,16 @@ class Sales extends Secure_area
 
 	function change_mode()
 	{
+		// added by Kamaro Lambert (kamaroly@gmail.com) to get the price category
 		$stock_location = $this->input->post("stock_location");
 		if (!$stock_location || $stock_location == $this->sale_lib->get_sale_location()) 
 		{
 			$this->sale_lib->clear_all();
 			$mode = $this->input->post("mode");
+			$price_category  = 	$this->input->post("price_category");
 			$this->sale_lib->set_mode($mode);
+			// change the price category too
+			$this->sale_lib->set_price_category($price_category);
 		} 
 		else
 		{
@@ -418,6 +422,10 @@ class Sales extends Secure_area
 		$data['cart']=$this->sale_lib->get_cart();	 
         $data['modes']=array('sale'=>$this->lang->line('sales_sale'),'return'=>$this->lang->line('sales_return'));
         $data['mode']=$this->sale_lib->get_mode();
+
+        // Added by Kamaro Lambert kamaroly@gmail.com so that this can support  different price mode;
+        $data['price_categories']=array('retail'=>$this->lang->line('sales_retail_price'),'whole'=>$this->lang->line('sales_whole_price'));
+        $data['price_category']	 = $this->sale_lib->get_price_category();
                      
         $data['stock_locations']=$this->Stock_locations->get_allowed_locations();
         $data['stock_location']=$this->sale_lib->get_sale_location();
