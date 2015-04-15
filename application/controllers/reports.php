@@ -1001,7 +1001,7 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular",$data);	
 	}
 	
-	function inventory_summary($export_excel=0)
+	function inventory_summary($export_excel=0,$supplier=0,$category=null)
 	{
 		$this->load->model('reports/Inventory_summary');
 		$model = $this->Inventory_summary;

@@ -30,7 +30,8 @@ class Inventory_summary extends Report
 
           if(!is_null($category) )
         {
-        	$this->db->where("items.category ='$category'");
+        	$this->db->where(" TRIM(LOWER(".$this->db->dbprefix('items').".category))", "'".$category."'",FALSE);
+        
         }
 		$this->db->order_by('items.name');
 		
