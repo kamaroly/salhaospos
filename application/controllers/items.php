@@ -527,6 +527,7 @@ class Items extends Secure_area implements iData_controller
 					'category'		=>	$data[2],
 					'cost_price'	=>	$data[4],
 					'unit_price'	=>	$data[5],
+					'whole_price'	=>	$data[26],
 					'reorder_level'	=>	$data[10],
 					'supplier_id'	=>  $this->Supplier->exists($data[3]) ? $data[3] : null,
 					'allow_alt_description'	=>	$data[12] != '' ? '1' : '0',
