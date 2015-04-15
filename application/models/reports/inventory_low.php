@@ -9,7 +9,7 @@ class Inventory_low extends Report
 	
 	public function getDataColumns()
 	{
-		return array($this->lang->line('reports_item_name'), $this->lang->line('reports_item_number'), $this->lang->line('reports_description'), $this->lang->line('reports_count'), $this->lang->line('reports_reorder_level'), $this->lang->line('reports_stock_location'));
+		return array($this->lang->line('reports_item_name'), $this->lang->line('reports_item_number'), $this->lang->line('reports_description'), $this->lang->line('reports_count'),$this->lang->line('items_cost_price'),$this->lang->line('items_unit_price'),$this->lang->line('items_whole_price'), $this->lang->line('reports_reorder_level'), $this->lang->line('reports_stock_location'));
 	}
 	
     public function getData(array $inputs)
@@ -18,7 +18,7 @@ class Inventory_low extends Report
         $this->db->join('item_quantities','items.item_id=item_quantities.item_id');
         $this->db->join('stock_locations','item_quantities.location_id=stock_locations.location_id');
         
-        $this->db->select('name, item_number, reorder_level, item_quantities.quantity,description,location_name');     
+        $this->db->select('name, item_number, reorder_level, item_quantities.quantity,cost_price,unit_price,whole_price,description,location_name');     
 
         $this->db->where('item_quantities.quantity <= reorder_level');
         $this->db->where('items.deleted = 0');

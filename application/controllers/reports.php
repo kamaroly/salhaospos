@@ -958,7 +958,7 @@ class Reports extends Secure_area
 		$report_data = $model->getData(array());
 		foreach($report_data as $row)
 		{
-			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['reorder_level'], $row['location_name']);
+			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['cost_price'], $row['unit_price'], $row['whole_price'], $row['reorder_level'], $row['location_name']);
 		}
 
 		$data = array(
@@ -981,7 +981,7 @@ class Reports extends Secure_area
 		$report_data = $model->getData(array());
 		foreach($report_data as $row)
 		{
-			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['reorder_level'],$row['location_name']);
+			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['cost_price'], $row['unit_price'], $row['whole_price'], $row['reorder_level'],$row['location_name']);
 		}
 
 		$data = array(
