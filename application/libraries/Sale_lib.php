@@ -572,8 +572,14 @@ class Sale_lib
 	function get_item_total($quantity, $price, $discount_percentage)  
 	{
 		$total = bcmul($quantity, $price, PRECISION);
-		$discount_fraction = bcdiv($discount_percentage, 100, PRECISION);
-		$discount_amount =  bcmul($total, $discount_fraction, PRECISION);
+
+		///////////////////////////////////////////////////////////////////////////////////////////
+		// Modified by Kamaro lambert so that we can sell with fixed amount discount not the % //
+		///////////////////////////////////////////////////////////////////////////////////////////
+
+		// $discount_fraction = bcdiv($discount_percentage, 100, PRECISION);
+		// bcmul($total, $discount_fraction, PRECISION);
+		$discount_amount = $discount_percentage;
 		return bcsub($total, $discount_amount, PRECISION);
 	}
 	
