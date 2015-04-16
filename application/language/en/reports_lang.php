@@ -93,4 +93,9 @@ $lang['reports_requisitions'] = 'Requisitions';
 $lang['reports_receiving_id'] = 'Receiving ID';
 $lang['reports_stock_location'] = 'Stock location';
 $lang['reports_inventory'] = 'Inventory';
+
+// Added by Kamaro Lambert (kamaroly@gmail.com)
+$lang['reports_items_cost_price'] ='Total items cost price';
+$lang['reports_items_unit_price'] ='Total items unit price';
+$lang['reports_items_whole_price'] ='Total items whole price';
 ?>
