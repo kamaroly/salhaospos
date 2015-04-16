@@ -48,7 +48,7 @@ $(document).ready(function()
 	{
 		var export_excel = 0;
 		var category,supplier_id;
-			category     = $( "#category option:selected" ).text();
+			category     = $( "#category option" ).filter(":selected").val();
 			supplier_id  = $( "#supplier option" ).filter(":selected").val();
 			
 		if ($("#export_excel_yes").attr('checked'))
