@@ -123,6 +123,10 @@ function show_hide_search_filter(search_filter_section, switchImgTag) {
 		"<div class='big_button' style='float: left;'><span>Excel Import</span></div>",
 		array('class'=>'thickbox none','title'=>'Import Items from Excel'));
 		?>
+		<?php echo anchor("reports/all_items",
+		"<div class='big_button' style='float: left;'><span>Excel Export</span></div>",
+		array('class'=>'none','title'=>'Import Items from Excel'));
+		?>
 	</div>
 </div>
 

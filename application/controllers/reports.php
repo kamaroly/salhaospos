@@ -1023,6 +1023,41 @@ class Reports extends Secure_area
 
 		$this->load->view("reports/tabular",$data);	
 	}
+
+  function all_items($export_excel=1,$supplier=0,$category=null)
+	{
+		$this->load->model('reports/All_items');
+		$model = $this->All_items;
+		$tabular_data = array();
+		
+		$report_data = $model->getData(array(),$supplier,$category);
+
+		foreach($report_data as $row)
+		{
+			////////////////////////////
+			// First get all taxes //
+			////////////////////////////
+			$taxes = '';
+			$item_taxes = (count($this->Item_taxes->get_info($row['item_id']))>0)?$this->Item_taxes->get_info($row['item_id']):array();
+			foreach($item_taxes as $taxe)
+			{
+				$taxes.= ' ,'.$taxe['name'] .':'. $taxe['percent'];
+			}
+
+			$tabular_data[] = array($row['name'],$row['description'],$row['category'],$row['quantity'],$row['cost_price'],$row['unit_price'],$row['whole_price'],$row['reorder_level'],$row['supplier_id'],$row['allow_alt_description'],$row['is_serialized'],$row['custom1'],$row['custom2'],$row['custom3'],$row['custom4'],$row['custom5'],$row['custom6'],$row['custom7'],$row['custom8'],$row['custom9'],$row['custom10'],$row['item_number'],$row['location_id'],$taxes);
+		}
+
+		$data = array(
+			"title" => 'All ITEMS',
+			"subtitle" => '',
+			"headers" => $model->getDataColumns(),
+			"data" => $tabular_data,
+			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
+			"export_excel" => $export_excel
+		);
+
+		$this->load->view("reports/tabular",$data);	
+	}
 	
 }
 ?>
