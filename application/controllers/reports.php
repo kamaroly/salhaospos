@@ -992,6 +992,7 @@ class Reports extends Secure_area
 		$data = array(
 			"title" => $this->lang->line('reports_inventory_low_report'),
 			"subtitle" => '',
+			"report_summary" =>$model->getSummaryData(array()),
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
 			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
@@ -1007,6 +1008,7 @@ class Reports extends Secure_area
 		$model = $this->Inventory_summary;
 		$tabular_data = array();
 		$report_data = $model->getData(array(),$supplier,$category);
+
 		foreach($report_data as $row)
 		{
 			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['quantity']*$row['cost_price'], $row['quantity']*$row['unit_price'], $row['quantity']*$row['whole_price'], $row['reorder_level'],$row['location_name']);
@@ -1017,7 +1019,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
+			"summary_data" => $model->getSummaryData(array()),
 			"export_excel" => $export_excel
 		);
 
@@ -1052,7 +1054,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
+			"summary_data" => $model->getSummaryData(array()),
 			"export_excel" => $export_excel
 		);
 

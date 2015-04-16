@@ -98,4 +98,9 @@ $lang['reports_inventory'] = 'Inventory';
 $lang['reports_items_cost_price'] ='Total items cost price';
 $lang['reports_items_unit_price'] ='Total items unit price';
 $lang['reports_items_whole_price'] ='Total items whole price';
+
+$lang['reports_total_quantity'] ='Total Quantity';
+$lang['reports_total_cost_price'] ='Total Cost price';
+$lang['reports_total_unit_price'] ='Total unit price';
+$lang['reports_total_whole_price'] ='Total whole price';
 ?>

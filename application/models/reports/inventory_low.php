@@ -43,7 +43,15 @@ class Inventory_low extends Report
 	
 	public function getSummaryData(array $inputs)
 	{
-		return array();
+        $this->db->from('items');       
+        $this->db->join('item_quantities','items.item_id=item_quantities.item_id');
+        $this->db->join('stock_locations','item_quantities.location_id=stock_locations.location_id');
+        
+        $this->db->select('sum('.$this->db->dbprefix('item_quantities').'.quantity) as total_quantity,sum('.$this->db->dbprefix('item_quantities').'.quantity)*cost_price as total_cost_price,sum('.$this->db->dbprefix('item_quantities').'.quantity)*unit_price as total_unit_price,sum('.$this->db->dbprefix('item_quantities').'.quantity)*whole_price as total_whole_price');
+        $this->db->where('item_quantities.quantity <= reorder_level');
+        $this->db->where('items.deleted', 0);   
+        
+		return $this->db->get()->row_array();
 	}
 }
 ?>

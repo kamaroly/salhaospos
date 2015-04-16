@@ -3,7 +3,14 @@
 function to_currency($number)
 {
 	$CI =& get_instance();
+
 	$currency_symbol = $CI->config->item('currency_symbol') ? $CI->config->item('currency_symbol') : '$';
+	
+	if(!is_numeric($number))
+	{
+		return '0'.$currency_symbol;
+	}
+
 	if($number >= 0)
 	{
 		if($CI->config->item('currency_side') !== 'currency_side')

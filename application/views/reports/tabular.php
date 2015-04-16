@@ -30,9 +30,10 @@ if($export_excel == 1){
 	</table>
 </div>
 <div id="report_summary">
-<?php foreach($summary_data as $name=>$value) { ?>
+
+<?php foreach($summary_data as $name=>$value): ?>
 	<div class="summary_row"><?php echo $this->lang->line('reports_'.$name). ': '.to_currency($value); ?></div>
-<?php }?>
+<?php endforeach;?>
 </div>
 <?php 
 if($export_excel == 1){
