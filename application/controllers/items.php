@@ -573,11 +573,11 @@ class Items extends Secure_area implements iData_controller
                                                 
                                                 // quantities                                                
                                                 $cols = count($data);
-                                                for ($col = 24; $col < $cols; $col = $col + 2)
+                                                for ($col = 24; $col < $cols; $col = $col + 3)
                                                 {
                                                     $item_quantity_data = array(
                                                         'item_id' => $item_data['item_id'],
-                                                        'location_id' => $data[$col],
+                                                        'location_id' => $data[$col] ? : 8, // 8 is default location ID
                                                         'quantity' => $data[$col + 1],
                                                     );
                                                     $this->Item_quantities->save($item_quantity_data, $data[$col], $data[$col + 1]);
