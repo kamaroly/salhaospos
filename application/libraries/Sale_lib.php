@@ -280,7 +280,10 @@ class Sale_lib
 
 		// Added by Kamaro Lambert
 		// First determine which price are using 
-		$selling_price =  ($this->get_price_category() =='retail') ?$item_info->unit_price:$item_info->whole_price; 
+		$price_category = $this->get_price_category();
+
+		$selling_price =  ($price_category==false || $price_category == 'retail') ? $item_info->unit_price:$item_info->whole_price; 
+	
 		//array/cart records are identified by $insertkey and item_id is just another field.
 		$item = array(($insertkey)=>
 		array(
