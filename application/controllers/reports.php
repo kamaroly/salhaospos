@@ -992,7 +992,6 @@ class Reports extends Secure_area
 		$data = array(
 			"title" => $this->lang->line('reports_inventory_low_report'),
 			"subtitle" => '',
-			"report_summary" =>$model->getSummaryData(array()),
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
 			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
@@ -1019,7 +1018,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array()),
+			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
 			"export_excel" => $export_excel
 		);
 

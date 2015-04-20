@@ -41,7 +41,7 @@ class Inventory_low extends Report
 
     }
 	
-	public function getSummaryData(array $inputs)
+	public function getSummaryData(array $inputs,$supplier=0,$category=null)
 	{
         $this->db->from('items');       
         $this->db->join('item_quantities','items.item_id=item_quantities.item_id');
@@ -50,7 +50,16 @@ class Inventory_low extends Report
         $this->db->select('sum('.$this->db->dbprefix('item_quantities').'.quantity) as total_quantity,sum('.$this->db->dbprefix('item_quantities').'.quantity)*cost_price as total_cost_price,sum('.$this->db->dbprefix('item_quantities').'.quantity)*unit_price as total_unit_price,sum('.$this->db->dbprefix('item_quantities').'.quantity)*whole_price as total_whole_price');
         $this->db->where('item_quantities.quantity <= reorder_level');
         $this->db->where('items.deleted', 0);   
-        
+               if((bool) $supplier)
+        {
+            $this->db->where('items.supplier_id ',$supplier);
+        }
+
+         if(!is_null($category) )
+        {
+            $this->db->where(" TRIM(LOWER(".$this->db->dbprefix('items').".category))", "'".$category."'",FALSE);
+        }
+
 		return $this->db->get()->row_array();
 	}
 }
