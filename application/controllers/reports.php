@@ -983,9 +983,22 @@ class Reports extends Secure_area
 		$tabular_data = array();
 		
 		$report_data = $model->getData(array(),$supplier,$category);
-
+		
+		$summary_data['total_quantity']		=0;
+		$summary_data['total_cost_price']		=0;
+		$summary_data['total_unit_price']		=0;
+		$summary_data['total_whole_price']		=0;
+		
 		foreach($report_data as $row)
-		{
+		{	
+			////////////////////////////////
+			// Getting summary reports //
+			////////////////////////////////
+			$summary_data['total_quantity']   +=$row['quantity'];
+			$summary_data['total_cost_price'] +=$row['quantity']*$row['cost_price'];
+			$summary_data['total_unit_price'] +=$row['quantity']*$row['unit_price'];
+			$summary_data['total_whole_price']+=$row['quantity']*$row['whole_price'];
+
 			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['quantity']*$row['cost_price'], $row['quantity']*$row['unit_price'], $row['quantity']*$row['whole_price'], $row['reorder_level'], $row['location_name']);
 		}
 
@@ -1007,9 +1020,20 @@ class Reports extends Secure_area
 		$model = $this->Inventory_summary;
 		$tabular_data = array();
 		$report_data = $model->getData(array(),$supplier,$category);
-
+		$summary_data['total_quantity']		=0;
+		$summary_data['total_cost_price']		=0;
+		$summary_data['total_unit_price']		=0;
+		$summary_data['total_whole_price']		=0;
 		foreach($report_data as $row)
-		{
+		{	
+			////////////////////////////////
+			// Getting summary reports //
+			////////////////////////////////
+			$summary_data['total_quantity']   +=$row['quantity'];
+			$summary_data['total_cost_price'] +=$row['quantity']*$row['cost_price'];
+			$summary_data['total_unit_price'] +=$row['quantity']*$row['unit_price'];
+			$summary_data['total_whole_price']+=$row['quantity']*$row['whole_price'];
+
 			$tabular_data[] = array($row['name'], $row['item_number'], $row['description'], $row['quantity'], $row['quantity']*$row['cost_price'], $row['quantity']*$row['unit_price'], $row['quantity']*$row['whole_price'], $row['reorder_level'],$row['location_name']);
 		}
 
@@ -1018,7 +1042,7 @@ class Reports extends Secure_area
 			"subtitle" => '',
 			"headers" => $model->getDataColumns(),
 			"data" => $tabular_data,
-			"summary_data" => $model->getSummaryData(array(),$supplier,$category),
+			"summary_data" => $summary_data,
 			"export_excel" => $export_excel
 		);
 
