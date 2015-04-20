@@ -14,22 +14,22 @@ function to_currency($number)
 	if($number >= 0)
 	{
 		if($CI->config->item('currency_side') !== 'currency_side')
-			return $currency_symbol.number_format($number, 0, '.', ',');
+			return $currency_symbol.number_format($number, 0, '.', '');
 		else
-			return number_format($number, 0, '.', ',').$currency_symbol;
+			return number_format($number, 0, '.', '').$currency_symbol;
 	}
     else
     {
     	if($CI->config->item('currency_side') !== 'currency_side')
-    		return '-'.$currency_symbol.number_format(abs($number), 0, '.', ',');
+    		return '-'.$currency_symbol.number_format(abs($number), 0, '.', '');
     	else
-    		return '-'.number_format(abs($number), 0, '.', ',').$currency_symbol;
+    		return '-'.number_format(abs($number), 0, '.', '').$currency_symbol;
     }
 }
 /** END MODIFIED **/
 
 function to_currency_no_money($number)
 {
-	return number_format($number, 0, '.', ',');
+	return number_format($number, 0, '.', '');
 }
 ?>
